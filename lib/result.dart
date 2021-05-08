@@ -27,11 +27,10 @@ class Result extends StatelessWidget {
           resultPhrase,
           style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
         )),
-        TextButton(
+        ElevatedButton(
             onPressed: resetQuiz,
             child: Text('Restart Quiz!'),
-            style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(Colors.blue)))
+            )
       ],
     );
   }

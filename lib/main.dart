@@ -14,28 +14,44 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
+  var _totalScore = 0;
+
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
 
   final _questions = const [
     {
       'questionText': 'What\'s your favorite color?',
-      'answers': ['Black', 'Red', 'Green', 'White']
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'White', 'score': 1}
+      ]
     },
     {
       'questionText': 'What\'s your favorite animal?',
-      'answers': ['Cat', 'Dog', 'Elephant', 'Lion']
+      'answers': [
+        {'text': 'Cat', 'score': 3},
+        {'text': 'Dog', 'score': 11},
+        {'text': 'Elephant', 'score': 9},
+        {'text': 'Lion', 'score': 5}
+      ]
     },
     {
       'questionText': 'Who is your daddy?',
-      'answers': ['Shrike']
+      'answers': [
+        {'text': 'Shrike', 'score': 1}
+      ]
     }
   ];
 
-  void _answerQuestion() {
-    if (_questionIndex < _questions.length) {
-      print('We have more questions');
-    } else {
-      print('No more questions');
-    }
+  void _answerQuestion(int score) {
+    _totalScore += score;
 
     setState(() {
       _questionIndex += 1;
@@ -50,6 +66,6 @@ class _MyAppState extends State<MyApp> {
             appBar: AppBar(title: Text('Demo')),
             body: _questionIndex < _questions.length
                 ? Quiz(_answerQuestion, _questions, _questionIndex)
-                : Result()));
+                : Result(_totalScore, _resetQuiz)));
   }
 }
